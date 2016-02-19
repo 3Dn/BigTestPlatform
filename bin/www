@@ -94,4 +94,8 @@ function onListening() {
 var x = db.foo();
 var y = db.foo_1();
 
+db.foo_1(function(err, done){
+  console.log(done);
+});
+
 console.log(x + " : " + y);

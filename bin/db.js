@@ -17,16 +17,16 @@ module.exports = {
         connection.query('SELECT * from sys_log', function (err, rows, fields) {
             if (err) throw err;
             console.log('IS: ', rows[0].message);
-            return "abc";
+            return true;
         });
     }
 };
 
-function foo() {
+function foo(callback) {
     connection.query('SELECT * from sys_log', function (err, rows, fields) {
         if (err) throw err;
         console.log('IS: ', rows[0].message);
-        return 0;
+
     });
 };
 
