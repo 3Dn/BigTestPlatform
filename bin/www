@@ -91,11 +91,10 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-var x = db.foo();
-var y = db.foo_1();
-
 db.foo_1(function(err, done){
   console.log(done);
 });
 
-console.log(x + " : " + y);
+db.x_x('q_q', function(ret){
+  console.log('from www -> ', ret);
+});

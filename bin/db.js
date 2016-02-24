@@ -22,14 +22,15 @@ module.exports = {
     }
 };
 
-function foo(callback) {
+function x_x(qu, callback) {
     connection.query('SELECT * from sys_log', function (err, rows, fields) {
         if (err) throw err;
-        console.log('IS: ', rows[0].message);
-
+        console.log('Query is: ', qu);
+        console.log('from function -> IS: ', rows[0].message)
+        callback(rows[0].message);
     });
-};
+}
 
-module.exports.foo = foo;
+module.exports.x_x = x_x;
 
 //connection.end();

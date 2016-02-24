@@ -3,13 +3,14 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <div id="main">
-      <div id="test_chart"></div>
-
+      <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     </div>
   </body>
 </html>
