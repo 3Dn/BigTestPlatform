@@ -24,6 +24,12 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Create Socket.io
+ */
+
+var io = require('socket.io').listen(server);
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
@@ -91,10 +97,28 @@ function onListening() {
   debug('Listening on ' + bind);
 }
 
-db.foo_1(function(err, done){
-  console.log(done);
+
+/**
+ * Main code
+ */
+
+io.on('connection', function(socket){
+  console.log('User connected!');
+  socket.emit('on_connect', { 'data': 'data'});
+
+  socket.on('ready', function(){
+    console.log('Client ready!');
+    db.data_for_chart('q', function(ret){
+      socket.emit('chart_data', {'data': ret});
+    })
+  });
+
+  socket.on('disconnect', function(){
+    console.log('User disconnected!');
+  })
 });
 
-db.x_x('q_q', function(ret){
+/*
+db.data_for_chart('q_q', function(ret){
   console.log('from www -> ', ret);
-});
+});*/

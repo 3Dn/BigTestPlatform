@@ -2,8 +2,9 @@
  * Created by adm_korolev on 24.02.2016.
  */
 $(function () {
-    $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-
+   // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+    socket.on('chart_data', function(data){
+        console.log(data);
         $('#container').highcharts({
             chart: {
                 zoomType: 'x'
@@ -21,6 +22,13 @@ $(function () {
             yAxis: {
                 title: {
                     text: 'Exchange rate'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
                 }
             },
             legend: {
@@ -56,12 +64,12 @@ $(function () {
             series: [{
                 type: 'area',
                 name: 'USD to EUR',
-                data: data
-            }, {
+                data: data.data
+            }/*, {
                 type: 'area',
                 name: 'n/a',
-                data: data
-            }]
+                data: data.data
+            }*/]
         });
     });
 });
