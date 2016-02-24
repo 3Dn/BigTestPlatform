@@ -25,7 +25,7 @@ connection.connect();
 function data_for_chart(qu, callback) {
     var ret_arr = [];
     var t_arr = [];
-    var sql = 'SELECT state, UTC_DATE(date) as date from scale1_log WHERE state=0 and date >= DATE_SUB(NOW(), INTERVAL 3 DAY)';
+    var sql = 'SELECT state, date from scale1_log WHERE state=0 and date >= DATE_SUB(NOW(), INTERVAL 3 DAY)';
     connection.query(sql, function (err, rows, fields) {
         if (err) throw err;
         rows.forEach(function (item) {
@@ -38,11 +38,12 @@ function data_for_chart(qu, callback) {
             var t_obj = {};
             var arr = [];
             var temp_date = new Date(t_arr[i]);
-            //var temp_date = t_arr[i];
 
-            t_obj.date = Date.UTC(temp_date.getFullYear(), temp_date.getMonth(), temp_date.getDay(), temp_date.getHours(), temp_date.getMinutes());
+            console.log(t_arr[i]);
 
-            t_obj.test = temp_date.getFullYear() + " : " + temp_date.getMonth() + " : " + temp_date.getDay() + " : " + temp_date.getHours() + " : " + temp_date.getMinutes();
+            t_obj.date = Date.UTC(temp_date.getFullYear(), temp_date.getUTCMonth(), temp_date.getUTCDay(), temp_date.getHours(), temp_date.getMinutes());
+
+            t_obj.test = temp_date.getFullYear() + " : " + temp_date.getUTCMonth() + " : " + temp_date.getUTCDay() + " : " + temp_date.getHours() + " : " + temp_date.getMinutes();
 
             var delta = (t_arr[i+1]-t_arr[i])/1000;
             var per_seconds = (20 / delta)*3600;
