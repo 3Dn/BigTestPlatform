@@ -27,7 +27,7 @@ $(function () {
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + '</b><br/>' +
-                        Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
                         Highcharts.numberFormat(this.y, 2);
                 }
             },
@@ -63,13 +63,13 @@ $(function () {
 
             series: [{
                 type: 'area',
-                name: 'USD to EUR',
-                data: data.data
-            }/*, {
+                name: '2.4 Кг/ч',
+                data: data.data_1
+            }, {
                 type: 'area',
-                name: 'n/a',
-                data: data.data
-            }*/]
+                name: '3.5 Кг/ч',
+                data: data.data_2
+            }]
         });
     });
 });

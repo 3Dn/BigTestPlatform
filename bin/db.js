@@ -23,10 +23,10 @@ connection.connect();
     }
 };*/
 
-function data_for_chart(qu, callback) {
+function data_for_chart(db, callback) {
     var ret_arr = [];
     var t_arr = [];
-    var sql = 'SELECT state, date from scale1_log WHERE state=0 and date >= DATE_SUB(NOW(), INTERVAL 3 DAY)';
+    var sql = 'SELECT state, date from ' + db + ' WHERE state=0 and date >= DATE_SUB(NOW(), INTERVAL 3 DAY)';
     connection.query(sql, function (err, rows, fields) {
         if (err) throw err;
         rows.forEach(function (item) {

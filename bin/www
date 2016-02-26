@@ -108,8 +108,11 @@ io.on('connection', function(socket){
 
   socket.on('ready', function(){
     console.log('Client ready!');
-    db.data_for_chart('q', function(ret){
-      socket.emit('chart_data', {'data': ret});
+    db.data_for_chart('scale1_log', function(ret){
+      socket.emit('chart_data', {'data_1': ret});
+    });
+    db.data_for_chart('scale2_log', function(ret){
+      socket.emit('chart_data', {'data_2': ret});
     })
   });
 
