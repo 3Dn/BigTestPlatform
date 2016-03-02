@@ -9,6 +9,7 @@ var debug = require('debug')('BigTestPlatform:server');
 var http = require('http');
 
 var db = require('./db.js');
+var udp = require('./udp.js');
 
 /**
  * Get port from environment and store in Express.
@@ -102,6 +103,9 @@ function onListening() {
  * Main code
  */
 
+var scales1 = [];
+var scales2 = [];
+
 io.on('connection', function(socket){
   console.log('User connected!');
   socket.emit('on_connect', { 'data': 'data'});
@@ -109,19 +113,17 @@ io.on('connection', function(socket){
   socket.on('ready', function(){
     console.log('Client ready!');
     db.data_for_chart('scale1_log', function(ret){
-      socket.emit('chart_data', {'data_1': ret});
+      //socket.emit('chart_data', {'data_1': ret});
+      scales1 = ret;
     });
     db.data_for_chart('scale2_log', function(ret){
-      socket.emit('chart_data', {'data_2': ret});
-    })
+      //socket.emit('chart_data', {'data_2': ret});
+      scales2 = ret;
+    });
+    socket.emit('chart_data', {'data_1': scales1, 'data_2': scales2});
   });
 
   socket.on('disconnect', function(){
     console.log('User disconnected!');
   })
 });
-
-/*
-db.data_for_chart('q_q', function(ret){
-  console.log('from www -> ', ret);
-});*/
