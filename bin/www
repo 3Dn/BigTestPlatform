@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('BigTestPlatform:server');
 var http = require('http');
+var events = require('events');
 
 var db = require('./db.js');
 var udp = require('./udp.js');
@@ -107,6 +108,11 @@ function onListening() {
 var scales1 = [];
 var scales2 = [];
 
+var eventEmitter = new events.EventEmitter();
+var ws1 = function ws1(str){
+  io.emit('ws', {data: str});
+}
+
 io.on('connection', function(socket){
   console.log('User connected!');
   socket.emit('on_connect', { 'data': 'data'});
@@ -130,3 +136,6 @@ io.on('connection', function(socket){
 });
 
 
+eventEmitter.addListener('ws', ws1);
+
+exports.eventEmitter = eventEmitter;

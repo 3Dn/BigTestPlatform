@@ -5,6 +5,10 @@ socket.on('on_connect', function(data){
     console.log(data.data);
 });
 
+socket.on('ws', function(data){
+    document.querySelector('#socket_text').innerHTML = "Data: " + data.data;
+})
+
 socket.emit('ready', 'q');
 
 /*
@@ -35,4 +39,4 @@ function ws_start(webSocketServer){
     }
 }
 
-ws_start("ws://192.168.1.78:81");
+//ws_start("ws://192.168.1.78:81");
