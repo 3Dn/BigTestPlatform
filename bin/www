@@ -130,6 +130,10 @@ io.on('connection', function(socket){
     socket.emit('chart_data', {'data_1': scales1, 'data_2': scales2});
   });
 
+  socket.on('first_button_click_on_web_page', function(msg){
+    console.log("First button click data: " + msg.data);
+  });
+
   socket.on('disconnect', function(){
     console.log('User disconnected!');
   })
